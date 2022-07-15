@@ -19,9 +19,14 @@ const todoSlice = createSlice({
             }
             state.todos.push(newTodo);
         },
+        updateTodo: (state, action) => {
+            const { id, title, description } = action.payload;
+            const index = state.todos.findIndex(todo => todo.id === +id);
+            state.todos[index] = { ...state.todos[index], title: title, description: description };
+        },
         completeTodo: (state, action) => {
             const id = action.payload;
-            const index = state.todos.findIndex(todo => todo.id === id)
+            const index = state.todos.findIndex(todo => todo.id === id);
             state.todos[index] = { ...state.todos[index], completed: true };
             // let index;
             // for (const todo of state.todos) {
@@ -32,7 +37,7 @@ const todoSlice = createSlice({
         },
         unCompleteTodo: (state, action) => {
             const id = action.payload;
-            const index = state.todos.findIndex(todo => todo.id === id)
+            const index = state.todos.findIndex(todo => todo.id === id);
             state.todos[index] = { ...state.todos[index], completed: false };
             // let index;
             // for (const todo of state.todos) {
@@ -49,5 +54,5 @@ const todoSlice = createSlice({
     }
 })
 
-export const { showTodos, addTodo, completeTodo, deleteTodo, unCompleteTodo } = todoSlice.actions;
+export const { showTodos, addTodo, completeTodo, deleteTodo, unCompleteTodo, updateTodo } = todoSlice.actions;
 export default todoSlice.reducer;

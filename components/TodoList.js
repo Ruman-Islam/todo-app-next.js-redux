@@ -1,12 +1,14 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDeleteLeft, faUndo, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { faDeleteLeft, faUndo, faCheckCircle, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { completeTodo, deleteTodo, unCompleteTodo } from '../redux/todoSlice';
+import { useRouter } from 'next/router'
 
 const TodoList = () => {
     const todos = useSelector((state) => state.todoReducer.todos);
     const dispatch = useDispatch();
+    const router = useRouter();
 
     return (
         <div className='bg-light p-5 rounded mt-3 w-100'
@@ -41,6 +43,11 @@ const TodoList = () => {
                                         <span onClick={() => dispatch(completeTodo(id))}>
                                             <FontAwesomeIcon icon={faCheckCircle} className='icon' />
                                         </span>}
+                                </span>
+                                <span
+                                    onClick={() => router.push({ pathname: '/editTodo', query: { id: id } })}
+                                    className='ms-2 text-primary icon' role='button'>
+                                    <FontAwesomeIcon icon={faEdit} className='icon' />
                                 </span>
                                 <span
                                     onClick={() => dispatch(deleteTodo(id))}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Landing = () => {
+const Home = () => {
     return (
         <div className='landing-container'>
             <h1>Welcome to Next.js Todo App</h1>
@@ -8,4 +8,4 @@ const Landing = () => {
     );
 };
 
-export default Landing;
+export default Home;

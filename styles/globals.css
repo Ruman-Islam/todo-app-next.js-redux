@@ -58,7 +58,7 @@ nav {
   color: navy;
 }
 .icon {
- width: 2rem;
+ width: 1.5rem;
 }
 #basic-addon2 {
   font-weight: 600;
@@ -85,10 +85,10 @@ nav {
 
 
 @media only screen and (max-width: 576px) {
-  .index{
+  /* .index{
     display: block;
     height: 100%;
-  }
+  } */
   .icon {
       font-size: 1.2rem;
   }

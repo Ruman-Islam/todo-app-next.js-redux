@@ -1,21 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import { addTodo } from '../redux/todoSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateTodo } from '../redux/todoSlice';
 import { useRouter } from 'next/router'
 
-const AddTodo = () => {
-    const router = useRouter();
-    const dispatch = useDispatch();
+const EditTodo = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm({ mode: 'onTouched' });
+    const todos = useSelector((state) => state.todoReducer.todos);
+    const { query: { id }, push } = useRouter();
+    const [todo, setTodo] = useState({});
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const existingTodo = todos.find(todo => todo.id === +id);
+        setTodo(existingTodo);
+    }, [id, todos])
 
     // handle submit 
     const onSubmit = async (data) => {
-        dispatch(addTodo(data));
+        const updatedTodo = { ...data, id: id };
+        dispatch(updateTodo(updatedTodo));
         reset();
-        router.push('/show-todo');
+        push('/show-todo');
     };
-
     return (
         <div className='todo-container'>
             <div>
@@ -26,7 +33,7 @@ const AddTodo = () => {
                     <form onSubmit={handleSubmit(onSubmit)}
                         className='input-container'>
                         <div className="input-group mt-3">
-                            <input type="text" className="form-control"
+                            <input type="text" className="form-control" defaultValue={todo?.title}
                                 placeholder="Title"
                                 {...register("title", {
                                     required: {
@@ -39,7 +46,7 @@ const AddTodo = () => {
                             {errors.title?.type === 'required' && errors.title?.message}
                         </label>
                         <>
-                            <textarea rows={4} type="text" className="form-control"
+                            <textarea rows={4} type="text" className="form-control" defaultValue={todo?.description}
                                 placeholder="What needs to be done?"
                                 {...register("description", {
                                     required: {
@@ -51,7 +58,7 @@ const AddTodo = () => {
                                 {errors.description?.type === 'required' && errors.description?.message}
                             </label>
                         </>
-                        <button type='submit' className="input-group-text" id="basic-addon2">Add todo</button>
+                        <button type='submit' className="input-group-text" id="basic-addon2">Update</button>
                     </form>
                 </div>
             </div>
@@ -59,4 +66,4 @@ const AddTodo = () => {
     );
 };
 
-export default AddTodo;
+export default EditTodo;
