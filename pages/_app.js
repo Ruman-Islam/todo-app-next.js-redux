@@ -14,10 +14,12 @@ function MyApp({ Component, pageProps }) {
         />
       </Head>
       <Provider store={store}>
-        <div className='index'>
-          <main className='main-container'>
-            <Navbar />
-            <Component {...pageProps} />
+        <div className='myApp'>
+          <main className='main-container-wrapper'>
+            <div className='main-container'>
+              <Navbar />
+              <Component {...pageProps} />
+            </div>
           </main>
         </div>
       </Provider>

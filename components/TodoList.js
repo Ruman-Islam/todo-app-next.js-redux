@@ -16,7 +16,7 @@ const TodoList = () => {
             <div className='border-bottom'>
                 <h6 style={{ textAlign: 'left' }}>Todo List</h6>
             </div>
-            <table className="table">
+            <table className="table table-dark table-striped">
                 {todos?.length > 0 &&
                     <thead>
                         <tr>
@@ -46,12 +46,12 @@ const TodoList = () => {
                                 </span>
                                 <span
                                     onClick={() => router.push({ pathname: '/editTodo', query: { id: id } })}
-                                    className='ms-2 text-primary icon' role='button'>
+                                    className='text-primary icon' role='button'>
                                     <FontAwesomeIcon icon={faEdit} className='icon' />
                                 </span>
                                 <span
                                     onClick={() => dispatch(deleteTodo(id))}
-                                    className='ms-2 text-danger icon' role='button'>
+                                    className='text-danger icon' role='button'>
                                     <FontAwesomeIcon icon={faDeleteLeft} className='icon' />
                                 </span>
                             </td>

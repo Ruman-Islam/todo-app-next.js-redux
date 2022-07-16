@@ -28,7 +28,7 @@ const EditTodo = () => {
             <div>
                 <div className='todo-body p-5 bg-light'>
                     <div className='border-bottom'>
-                        <h6 style={{ textAlign: 'left' }}>Create a new todo</h6>
+                        <h6 style={{ textAlign: 'left' }}>Update todo</h6>
                     </div>
                     <form onSubmit={handleSubmit(onSubmit)}
                         className='input-container'>
