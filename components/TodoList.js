@@ -16,7 +16,7 @@ const TodoList = () => {
             <div className='border-bottom'>
                 <h6 style={{ textAlign: 'left' }}>Todo List</h6>
             </div>
-            <table className="table table-dark table-striped">
+            <table className="table">
                 {todos?.length > 0 &&
                     <thead>
                         <tr>
